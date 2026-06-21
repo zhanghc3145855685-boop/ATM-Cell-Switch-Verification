@@ -33,4 +33,3 @@ project/
 │   └── tb/           # Testbench 顶层及接口定义
 ├── sim/              # VCS 仿真运行脚本、Makefile 及自动化流水线
 ├── docs/             # 项目技术文档（规格书、仿真分析报告 PDF）
-└── README.md         # 项目说明文档
