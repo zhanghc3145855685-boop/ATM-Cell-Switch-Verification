@@ -1,2 +1,36 @@
 # ATM-Cell-Switch-Verification
-基于 SystemVerilog 分层架构的 4×4 多端口 ATM 交换芯片闭合验证平台。采用 OOP 思想、Clocking Block 时序同步及 Callback 采样解耦技术；内置队列核销机制的 Golden Model 自动比对，构建多维交叉覆盖率模型，实现功能与代码双 90%+ 覆盖率闭合。
+
+## 项目概述 (Project Overview)
+本项目针对一款多端口 ATM 交换芯片设计并搭建了完整的 SystemVerilog 分层验证环境。该芯片支持 4×4 ATM 物理链路路由与可配置转发表功能。本项目通过构建面向对象（OOP）的验证组件、引入黄金参考模型（Golden Model）进行动态数据核销，以及深度交叉覆盖率分析，实现了对复杂路由逻辑与协议边界情况的全面覆盖与验证闭合。
+
+---
+
+## 核心架构与工程亮点 (Key Technical Features)
+
+### 1. 验证平台架构 (Verification Architecture)
+* **分层验证方法学**：基于工业界标准的层次化架构，包含 Generator（激励生成）、Driver（驱动）、Monitor（监视）、Scoreboard（记分板）等模块，实现了激励与采样的有效解耦。
+* **黄金参考模型 (Golden Model)**：内置基于队列的动态核销机制，能够实时比对 DUT 输出与预期行为，快速定位逻辑偏差。
+* **覆盖率驱动验证 (CDV)**：通过定义 Covergroups 与 Cross Coverage，针对 ATM 信元在多端口并发场景下的路由竞争进行了高强度覆盖测试。
+
+### 2. 设计实现 (Design Specs)
+* **协议支持**：完整支持 NNI/UNI 物理接口协议转换。
+* **调度逻辑**：实现了高性能查找表（LUT）映射及数据通道仲裁逻辑，支持掉帧处理与静态配置。
+
+---
+
+## 工程实现背景 (Engineering Methodology)
+本项目的所有核心验证源码、仿真自动化脚本及技术分析报告，均基于离线受限环境下的自主开发。在无原始工程参考的情况下，通过对芯片设计规格（Spec）的深度解析与逻辑仿真 Debug，完成了验证平台的重构与语法合规性闭合。该过程充分体现了对 VCS/Verdi 等 EDA 工具链的熟练掌控，以及在复杂约束下保障功能闭合的工程攻坚能力。
+
+---
+
+## 目录结构 (Repository Structure)
+
+```text
+project/
+├── src/
+│   ├── env/          # 验证环境组件（Driver, Monitor, Scoreboard, Agent）
+│   ├── rtl/          # 芯片设计源码 (DUT)
+│   └── tb/           # Testbench 顶层及接口定义
+├── sim/              # VCS 仿真运行脚本、Makefile 及自动化流水线
+├── docs/             # 项目技术文档（规格书、仿真分析报告 PDF）
+└── README.md         # 项目说明文档
